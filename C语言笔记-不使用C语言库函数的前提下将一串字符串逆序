@@ -1,0 +1,67 @@
+//#include<stdio.h>//这个是用来测试逆序正确的//用于printf
+int sz(char* arr)//自定义函数求字符串长度//return返回值用int
+{
+	int cout = 0;
+	while (*arr != '\0')
+	{
+		arr = arr + 1;//arr++; 一样
+		cout++;
+	}
+	return cout;
+}
+void reverse(char arr[])
+{
+	int left = 0;
+	int right = sz(arr)-1;
+	while (left < right)
+	{
+		int temp = arr[left];
+		arr[left] = arr[right];
+		arr[right] = temp;
+		left++;
+		right--;
+	}
+}
+int main()
+{
+	char arr[] = "abcdefg";//gfedcba
+	reverse(arr);
+// printf("%s\n", arr);//测试逆序正确与否
+	return 0;
+}
+
+
+
+
+
+
+递归思想
+
+//#include<stdio.h>//测试用
+int my_strlen(char* arr)//自定义函数求字符串长度
+{
+	int count = 0;
+	while (*arr != '\0')//开始写成‘0’找了好久的错误，有点坑
+	{
+		arr=arr+1;//a++一样
+		count++;
+	}
+	return count;
+}
+void reverse(char* arr)
+{
+	int len = my_strlen(arr);
+	char temp = arr[0];
+	arr[0] = arr[len-1];
+	arr[len-1] = '\0';
+	if(my_strlen(arr+1) >=2)//加限制条件防止死递归循环
+	       reverse(arr+1);
+	arr[len-1] = temp;
+}
+int main()
+{
+	char arr[] = "abcdefg";
+	reverse(arr);
+	//printf("%s\n", arr);//测试用
+	return 0;
+}
